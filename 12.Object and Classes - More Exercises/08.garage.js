@@ -16,7 +16,7 @@ function solve(input) {
     }
 
     for (const garageNumber in garage) {
-        console.log(`Garage № ${garageNumber}:`);
+        console.log(`Garage № ${garageNumber}`);
         for (const vehicle of garage[garageNumber]) {
             const vehicleKeys = Object.entries(vehicle);
             const result = vehicleKeys.map(v => `${v[0]} - ${v[1]}`).join(', ')
