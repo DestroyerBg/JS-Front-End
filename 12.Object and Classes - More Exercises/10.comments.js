@@ -6,7 +6,10 @@ function solve(input) {
         }
 
         addComment(userName, commentAsObj){
-            this.comments[userName] = commentAsObj;
+           if (!this.comments.hasOwnProperty(userName)) {
+                this.comments[userName] = [];
+           }
+           this.comments[userName].push(commentAsObj);
         }
     }
     const users = [];
@@ -43,9 +46,14 @@ function solve(input) {
         console.log(`Comments on ${article.name}`);
         const sortedComments = Object.entries(article.comments).sort((a,b) => a[0].localeCompare(b[0]));
         for (const comment of sortedComments) {
-            console.log(`--- From user ${comment[0]}: ${comment[1]['comment-title']} - ${comment[1]['comment-Content']}`);
+           const userComments = comment[1].map(c => Object.entries(c));
+           userComments.forEach(element => {
+            console.log(`--- From user ${comment[0]}: ${element[0][1]} - ${element[1][1]}`);
+       });
         }
     }
+    
 }
 
-solve(['user aUser123', 'someUser posts on someArticle: NoTitle, stupidComment', 'article Books', 'article Movies', 'article Shopping', 'user someUser', 'user uSeR4', 'user lastUser', 'uSeR4 posts on Books: I like books, I do really like them', 'uSeR4 posts on Movies: I also like movies, I really do', 'someUser posts on Shopping: title, I go shopping every day', 'someUser posts on Movies: Like, I also like movies very much']);
+solve(["user mike", "user lucy", "article a", "mike posts on a: hit, him",
+"lucy posts on a: vic, goal", "lucy posts on a: Like, hop"]);
